@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summaries</title>
+  <link href='general-navigation-style.css' rel='stylesheet'>
+  <style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , poppins;
+}
+
+@font-face {
+            font-family: 'Poppins';
+            src: url('Font Folder/Poppins-Light.ttf') format('truetype');
+            /* Add additional src lines for different font weights/styles if needed */
+        }
+
+        body {
+            font-family: 'Poppins', poppins;
+        }
+.sidebar{                                  font-family: sans-serif;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: #11101D;
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+.sidebar.open{
+  width: 250px;
+}
+.sidebar .logo-details{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebar .logo-details .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.sidebar .logo-details .logo_name{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name{
+  opacity: 1;
+}
+.sidebar .logo-details #btn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details #btn{
+  text-align: right;
+}
+.sidebar i{
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebar li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.sidebar li .tooltip{
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar.open li .tooltip{
+  display: none;
+}
+.sidebar input{
+  font-size: 15px;
+  color: #FFF;
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: #1d1b31;
+}
+.sidebar.open input{
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+.sidebar .bx-search{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: #1d1b31;
+  color: #FFF;
+}
+.sidebar.open .bx-search:hover{
+  background: #1d1b31;
+  color: #FFF;
+}
+.sidebar .bx-search:hover{
+  background: #FFF;
+  color: #11101d;
+}
+
+.sidebar p:hover{
+  color:#11101D;
+  background-color: #FFF;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebar li p:hover .links_name,
+.sidebar li p:hover i{
+  transition: all 0.5s ease;
+  color: #11101D;
+}
+span{                                      font-family: sans-serif;                    
+  display: block;
+  float: right;
+ 
+}
+.sidebar li a .links_name{
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar li a .links_name :hover{
+ border-color: #fff;
+  
+}
+.sidebar.open li a .links_name{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.sidebar li.profile{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.sidebar.open li.profile{
+  width: 250px;
+}
+.sidebar li .profile-details{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebar li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+.sidebar li.profile .name,
+.sidebar li.profile .job{
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar li.profile .job{
+  font-size: 12px;
+}
+.sidebar .profile #log_out{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #1d1b31;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out{
+  width: 50px;
+  background: none;
+}
+.home-section{
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+.sidebar.open ~ .home-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.home-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+@media (max-width: 420px) {
+  .sidebar li .tooltip{
+    display: none;
+  }
+}
+
+nav{
+  display: flex;
+  height: 75px;
+  width: 100%;
+  background: #11101d;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px 0 100px;
+  flex-wrap: wrap;
+}
+nav .logo{
+  color: #fff;
+  font-size: 35px;
+  font-weight: 600;
+}
+nav ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+nav ul li{
+  margin: 0 5px;
+}
+nav ul li a{
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+nav ul li a.active,
+nav ul li a:hover{
+  color: #111;
+  background: #fff;
+}
+nav .menu-btn i{
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;
+}
+input[type="checkbox"]{
+  display: none;
+}
+@media (max-width: 1000px){
+  nav{
+    padding: 0 40px 0 50px;
+  }
+}
+@media (max-width: 920px) {
+  nav .menu-btn i{
+    display: block;
+  }
+  #click:checked ~ .menu-btn i:before{
+    content: "\f00d";
+  }
+  nav ul{
+    position: fixed;
+    top: 80px;
+    left: -100%;
+    background: #111;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  #click:checked ~ ul{
+    left: 0;
+  }
+  nav ul li{
+    width: 100%;
+    margin: 40px 0;
+  }
+  nav ul li a{
+    width: 100%;
+    margin-left: -100%;
+    display: block;
+    font-size: 20px;
+    transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  #click:checked ~ ul li a{
+    margin-left: 0px;
+  }
+  nav ul li a.active,
+  nav ul li a:hover{
+    background: none;
+    color: cyan;
+  }
+}
+.content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: -1;
+  width: 100%;
+  padding: 0 30px;
+  color: #1b1b1b;
+}
+
+nav ul{
+             margin: 0px;
+             padding: 0px;
+             list-style: none;
+			 cursor: pointer;
+            }
+            nav   ul li{
+             float: left;
+             width: 200px;
+             height: 40px;
+             cursor: pointer;
+             line-height: 40px;
+             text-align: center;
+             font-size: 1.7rem; 
+             margin-right: 7px;
+             padding-bottom: 4px;
+			 
+              }
+              nav   ul li a{
+             text-decoration: none;
+             color: black;
+             display: black;
+             background-color: #fff;
+			 cursor: pointer;
+			 
+               }
+               nav ul li a:hover {
+                color: #fff;
+              background-color: #11101D;
+              cursor: pointer;
+			   border-radius: 20px;
+                     }
+                     nav  ul li ul li{
+             display: none;
+             color: #fff;
+              background-color: #11101D;
+             
+			  cursor: pointer;
+                  }
+     nav  ul li:hover ul li{
+              display: block;
+              color: #111;
+              background-color: #fff;
+             
+			  cursor: pointer;
+      }
+      div1{
+        font-size: 9rem;
+        color: #11101D;
+      }
+      body{
+        background: url('images/nite.jpg');
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+      .card1,.card2,.card3{
+  display: grid;
+  grid-template-columns: 300px;
+  grid-template-rows: 210px 250px 20px;
+  grid-template-areas: "image" "text" "stats";
+
+  border-radius: 18px;
+  background:  #11101d;
+  color: white;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+  font-family: Arial, Helvetica, poppins;
+  text-align: justify;
+  transition: 0.5s ease;
+  cursor: pointer;
+  margin:30px;
+  width: 300px;
+}
+
+.card3:hover {
+  transform: scale(1.04);
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.6);
+}
+.card2:hover {
+  transform: scale(1.04);
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.6);
+}
+.card1:hover {
+  transform: scale(1.04);
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.6);
+}
+.card-image {
+  grid-area: image;
+}
+.card-text {
+  grid-area: text;
+}
+.card-stats {
+    grid-area: stats;
+}
+.card-image {
+  grid-area: image;
+  background: linear-gradient(#fff0 0%, #fff0 70%,  #11101d 100%),url("images/new.jpg");
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-size: cover;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.card-image2 {
+  grid-area: image;
+  background: linear-gradient(#fff0 0%, #fff0 70%, #11101d 100%),url("images/one.jpg");
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-size: cover;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.card-image3 {
+  grid-area: image;
+  background: linear-gradient(#fff0 0%, #fff0 70%,  #11101d 100%),url("images/any.jpg");
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-size: cover;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.card-text {
+  grid-area: text;
+  margin: 20px;
+}
+.card-text .date {
+  color: rgb(255, 7, 110);
+  font-size:13px;
+}
+.card-text p {
+  color: grey;
+  font-size:20px;
+  font-weight: 300;
+}
+.card-text p a{
+  padding-left: 10px;
+  text-decoration: underline;
+  color:rgb(147, 197, 205)
+}
+.card-text h2 {
+  margin-top:0px;
+  font-size:28px;
+}
+.card-stats {
+  grid-area: stats; 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background: rgb(255, 7, 110);
+}
+.card-stats .stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  color: white;
+  padding:10px;
+}
+.col{
+    display: inline-block;
+    flex-basis: 50%;
+}
+.row{
+   display: flex;
+   padding-left: 160px;
+   margin-top: 0%;
+}
+.bottom{
+  font-size: 2rem;
+  padding-left: 100px;
+}
+.home2{
+  position: relative;
+ 
+}
+h32{
+       font-size: 1.8rem;
+       padding-left: 100px;
+       color: white;
+       padding-top: 50px;
+     }
+     h33{
+       font-size: 1.8rem;
+       padding-left: 100px;
+     }
+
+     
+
+</style>
+   </head>
+
+<body>
+  <header>
+    <div class="null">
+    <div class="navbar">
+        <div class="logo"><img src="images/new2.png"  id="m3" class="hello" style="position: absolute;
+            width: 200px;
+            height: auto;
+            left: 40px;
+            top: 21px;"></div>
+        <ul class="links">
+
+            <li  style="font-family: url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');"><a class="active" href="planC2.html">Home</a></li>
+      
+            <li><a href="#">Things to do</a>
+            <ul>
+              <li><a href="https://me.codejika.org/login" >Learn Coding</a></li>  
+               <li><a href="chatroom.html">Join Chat-room</a></li>
+                <li><a href="todo.html">To do list</a></li>
+           
+             
+             
+          </ul></li>
+          <li><a>Libary</a>
+            <ul>
+              <li><a href="PlanC3.1.html">SS1</a></li>
+              <li><a href="planC3.2.html">SS2</a></li>
+              <li><a href="PlanC3.3.html">SS3</a></li>
+          </ul></li>
+          <li><a href="#">Portfolio</a>
+        <ul>
+            <li><a href="about.html">About Us</a>
+           
+            </li>
+               <li><a href="feedback.html">Feedback</a></li>
+           
+        </ul></li>
+         
+        </ul>
+       <div class="search" id="m4" style="right: 0;">
+        <i><img src="images/search.png" style="height: 40px; width: auto;"/></i>
+       </div>
+        <div class="toggle_btn">
+           <i><img src="images/menu.png" style="height: 30px; width: 40px;"/></i> 
+        </div>
+    </div>
+  </div>
+  
+    <div class="dropdown_menu">
+      <li  style="font-family: url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');"><a class="active" href="planC2.html">Home</a></li>
+      <li><a href="#" style="color: #000000;">Things to do</a></li>
+      <li><a href="https://me.codejika.org/login" >Learn Coding</a></li>  
+      <li><a href="chatroom.html">Join Chat-room</a></li>
+      <li><a href="todo.html">To do list</a></li>
+      <li><a  style="color: #000000;">Libary</a></li>
+      <li><a href="PlanC3.1.html">SS1</a></li>
+      <li><a href="planC3.2.html">SS2</a></li>
+      <li><a href="PlanC3.3.html">SS3</a></li>
+      <li><a href="about.html" style="color: #000000;">About Us</a>  </li>
+      <li><a href="feedback.html" style="color: #000000;">Feedback</a></li>
+       <li href="planC9.html"><a class="active" href="#">User</a></li>
+        <li><a href="https://chat.openai.com/auth/login" style="color: #000000;">AI</a></li>
+        <li><a href="chatroom.html">Chat-room</a></li>  
+        <li><a href="summaries.html">Summaries</a></li>
+        <li><a href="https://www.exambly.com/">Exam test</a></li>
+        <li><a href="https://psychometrica.org/lp/test/iq-1-en-2/?version=android&loc_physical_ms=1010283&gclid=CjwKCAjwov6hBhBsEiwAvrvN6LAqhntadFFEatZq3bSyAcuqwdfesCROmLNershDDJD94NZHtiI3rRoCofIQAvD_BwE" style="color: #000000;">IQ test</a></li>
+        <li><a href="planC11.html">Settings</a></li>
+        
+    </div>
+    <div class="dropdown_menu two">
+      <li href="planC9.html"><a class="active" href="#">User</a></li>
+        <li><a href="https://chat.openai.com/auth/login" style="color: #000000;">AI</a></li>
+        <li><a href="chatroom.html">Chat-room</a></li>  
+        <li><a href="summaries.html">Summaries</a></li>
+        <li><a href="https://www.exambly.com/">Exam test</a></li>
+        <li><a href="https://psychometrica.org/lp/test/iq-1-en-2/?version=android&loc_physical_ms=1010283&gclid=CjwKCAjwov6hBhBsEiwAvrvN6LAqhntadFFEatZq3bSyAcuqwdfesCROmLNershDDJD94NZHtiI3rRoCofIQAvD_BwE" style="color: #000000;">IQ test</a></li>
+        <li><a href="planC11.html">Settings</a></li>
+     
+  </div>
+   </header>
+
+
+
+<br><br><br>
+
+  <div class="home2">
+      
+  <br>
+    <div class="row">
+      <div class="col1">
+      <div class="card1">
+          <div class="card-image"></div>
+          <div class="card-text">
+            <span class="date">3 weeks ago</span>
+         <h2>SS1</h2>
+        <br>    <p>Get your summaries of  SS1 First Term to Third Term. Simply Click<a href="planC3.1.html">here</a>  now to begin</p>
+          </div>
+       </div>   
+      </div>
+      
+      <div class="col3">
+        <div class="card3">
+            <div class="card-image3"></div>
+            <div class="card-text">
+              <span class="date">4 days ago</span>
+             <h2>SS2</h2>
+            <br>  <p>Get your summaries of  SS1 First term to Third term notes. Simply Click <a href="planC3.2.html">here</a> now to begin your journey</p>
+            </div>
+          </div>
+  
+        </div> 
+
+     <div class="col2">
+      <div class="card2">
+          <div class="card-image2"></div>
+          <div class="card-text">
+            <span class="date">6 months ago</span>
+          <h2>SS3</h2>
+         <br>   <p>Get your summaries of  SS2 First Term to Third Term. Simply Click <a href="planC3.3.html">here</a> now to begin </p>
+          </div>
+        </div>  
+      </div> 
+    
+      
+  </div>
+
+
+
+
+
+      
+    </div>
+
+
+
+
+
+
+
+  <div class="sidebar">
+    <div class="logo-details">
+     <div class="logo_name"><div class="logo"><img src="images/new1.png" class="hello" style=" position: fixed;
+        width: 250px;
+        height: auto;
+        left: 80px;
+        top: 28px"></div></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Search</span>
+      </li>
+
+      <li>
+      <p><a href="planC9.html">
+         <i class='bx bx-user' ></i>
+         <span class="links_name" style="margin-top: 15px; margin-right: 130px;">User</span>
+       </a>
+       <span class="tooltip">User</span>
+      </p>  </li>
+
+      <li>
+        <a href="https://chat.openai.com/auth/login">
+          <p><a href="https://chat.openai.com/auth/login"">
+               <i class='bx bx-grid-alt'></i>
+               <span class="links_name" style="margin-top: 15px; margin-right: 90px;" href="https://chat.openai.com/auth/login">Try out A.I.</span>
+             </a>
+              <span class="tooltip" href="https://chat.openai.com/auth/login">Try out A.I.</span>
+             </p>   </li></a>
+
+     <li>
+    <p>   <a href="chatroom.html">
+         <i class='bx bx-chat' ></i>
+         <span class="links_name" style="margin-top: 15px; margin-right: 93px">Chat-room</span>
+       </a>
+       <span class="tooltip">Chat-room</span>
+      </p>   </li>
+     <li>
+
+      <li>
+        <p>  <a href="#">
+             <i class='bx bx-cart-alt' ></i>
+             <span class="links_name" style="margin-top: 15px; margin-right: 97px;">Sumarries</span>
+           </a>
+           <span class="tooltip">Sumarries</span>
+          </p>  </li>
+     <li>
+   
+    <p>   <a href="#">
+         <i class='bx bx-heart' ></i>
+         <span class="links_name"style="margin-top: 15px;  margin-right: 97px; " >Quick test</span>
+       </a>
+       <span class="tooltip">Saved</span>
+      </p>  </li>
+	    <li>
+    <p>   <a href="https://psychometrica.org/lp/test/iq-1-en-2/?version=android&loc_physical_ms=1010283&gclid=CjwKCAjwov6hBhBsEiwAvrvN6LAqhntadFFEatZq3bSyAcuqwdfesCROmLNershDDJD94NZHtiI3rRoCofIQAvD_BwE">
+         <i class='bx bx-pie-chart-alt-2' ></i>
+         <span class="links_name" style="margin-top: 15px;  margin-right: 117px;">IQ Test</span>
+       </a>
+       <span class="tooltip">IQ Test</span>
+      </p>  </li>
+
+      <li>
+        <p>   <a href="time.html">
+             <i class='bx bx-folder' ></i>
+             <span class="links_name" style="margin-top: 15px; margin-right: 97px;" >Time table</span>
+           </a>
+           <span class="tooltip">Time-table</span>
+          </p>  </li>
+
+     <li>
+    <p>  <a href="planC11.html">
+         <i class='bx bx-cog' ></i>
+         <span class="links_name" style="margin-top: 15px;  margin-right: 117px;">Setting</span>
+       </a>
+       <span class="tooltip">Setting</span>
+      </p>   </li>
+     <li class="profile">
+         <div class="profile-details">
+           <img src="images/man.jpg" alt="profileImg">
+           <div class="name_job">
+             <div class="name">Adriel</div>
+             <div class="job">Web master in training</div>
+           </div>
+         </div>
+         <i class='bx bx-log-out' id="log_out" ></i>
+     </li>
+    </ul>
+  </div>
+  
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+</body>
+</html>
+
+ 

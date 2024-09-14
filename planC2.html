@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home-Page</title>
+  <style>
+      @font-face {
+            font-family: 'Poppins';
+            src: url('Font Folder/Poppins-Light.ttf') format('truetype');
+            /* Add additional src lines for different font weights/styles if needed */
+        }
+
+        body {
+            font-family: 'Poppins', poppins;
+        }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , poppins;
+}
+
+
+.sidebar{                                 
+  font-family: sans-serif;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 71px;
+  background: #11101D;
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+.sidebar.open{
+  width: 250px;
+}
+.sidebar .logo-details{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebar .logo-details .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.sidebar .logo-details .logo_name{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name{
+  opacity: 1;
+}
+.sidebar .logo-details #btn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details #btn{
+  text-align: right;
+}
+.sidebar i{
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebar li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.sidebar li .tooltip{
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar.open li .tooltip{
+  display: none;
+}
+.sidebar input{
+  font-size: 15px;
+  color: #FFF;
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: #1d1b31;
+}
+.sidebar.open input{
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+.sidebar .bx-search{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: #1d1b31;
+  color: #FFF;
+}
+.sidebar.open .bx-search:hover{
+  background: #1d1b31;
+  color: #FFF;
+}
+.sidebar .bx-search:hover{
+  background: #FFF;
+  color: #11101d;
+}
+
+.sidebar p:hover{
+  color:#11101D;
+  background-color: #FFF;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebar li p:hover .links_name,
+.sidebar li p:hover i{
+  transition: all 0.5s ease;
+  color: #11101D;
+}
+span{                                      font-family: sans-serif;                    
+  display: block;
+  float: right;
+ 
+}
+.sidebar li a .links_name{
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar li a .links_name :hover{
+ border-color: #fff;
+  
+}
+
+
+
+
+.sidebar.open li a .links_name{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.sidebar li.profile{
+  position: fixed;
+  height: 60px;
+   width: 71px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.sidebar.open li.profile{
+  width: 250px;
+}
+.sidebar li .profile-details{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebar li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+.sidebar li.profile .name,
+.sidebar li.profile .job{
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar li.profile .job{
+  font-size: 12px;
+}
+.sidebar .profile #log_out{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #1d1b31;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out{
+  width: 50px;
+  background: none;
+}
+.home-section{
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+.sidebar.open ~ .home-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.home-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+@media (max-width: 420px) {
+  .sidebar li .tooltip{
+    display: none;
+  }
+}
+
+li{
+        list-style: none;
+    }
+    a{
+        text-decoration: none;
+        
+        font-size: 1rem;
+    }
+    
+    header{
+        position: relative;
+        padding: 0;
+       
+    }
+    .null{
+        height: auto;
+        width: 100%;
+       
+    }
+    .navbar{
+        width: 100%;
+        height: 60px;
+        margin: 0 auto;
+      
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #11101d;
+        
+    }
+    .navbar .logo{
+        padding-left: 1rem;
+    }
+    .navbar .links{
+        padding-right: 1rem;
+    }
+    .navbar .logo a{
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .navbar .links{
+        display: flex;
+        gap: 2rem;
+    }
+    .navbar .toggle_btn{
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: none;
+    }
+ 
+    .action_btn:hover{
+        scale: 1.05;
+        color: #fff;
+    }
+    .action_btn:active{
+        scale: 0.95;
+    }
+    
+    .dropdown_menu{
+        display: none;
+        position: absolute;
+        right: 0rem;
+        top: 60px;
+        height: 0;
+        width: 300px;
+       margin-right: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        overflow: hidden;
+        border-radius: 10px;
+        transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .dropdown_menu2{
+        display: none;
+        position: absolute;
+        right: 0rem;
+        top: 60px;
+        height: 0;
+        width: 300px;
+margin-right: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        overflow: hidden;
+        border-radius: 10px;
+        transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .dropdown_menu.open{
+         height: auto;
+    }
+    .dropdown_menu.two.open{
+         height: auto;
+    }
+    
+    .bropdown_menu .action_btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .dropdown_menu li a{
+        color: #fff;
+    }
+    .dropdown_menu li{
+        padding: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
+    
+    @media (max-width: 992px) {
+        .navbar .links,
+        .navbar .action_btn{
+            display: none;
+        }
+    
+        .navbar .toggle_btn{
+            display: block;
+        }
+        .dropdown_menu{
+            display: block;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .dropdown_menu{
+            left: 0.5rem;
+            width: unset;
+            right: 0.5rem;
+        }
+    }
+    .null .navbar ul{
+        cursor: pointer;
+        text-decoration: none;
+    
+    }
+    .navbar .links li a{
+        color: #11101d;
+        background-color: #fff;
+        padding: 8px 10px 8px 10px;
+        border-radius: 5px;
+       
+    }
+    .navbar .links li{
+             
+                 width: 170px;
+                 height: 40px;
+                 cursor: pointer;
+                 line-height: 40px;
+                 text-align: center;
+                 font-size: 1.7rem; 
+               
+                 padding-bottom: 4px;
+    }
+    .navbar .links li a:hover{
+        background-color: #11101d;
+        color: #fff;
+        transition: 0.3s ease;
+       
+    }
+    .navbar .links li ul li{
+        display: none;
+        color: #fff;
+        background-color: #11101d;
+        cursor: pointer;
+    }
+    .navbar .links li:hover ul li{
+        display: block;
+        color: #111;
+        background-color: #fff;
+        cursor: pointer;
+    }
+
+
+      .home{
+	     width: 100%;
+		 height: 300px;
+		 cursor: pointer;
+		 background-image: url("images/man (2).jpg");
+		 background-position: center;
+		 background-size: cover;
+		 border-bottom: 10px solid #11101D;
+		 }
+		h5{color: white;
+		   font-size: 1.5rem;
+		   margin: auto 0;
+		   text-align: right;
+		   padding-right: 45px;}
+		h3 button ul li{
+                height: 35px;
+                width: 100px;
+                background: #11101d;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 50px 0 100px;
+                flex-wrap: wrap;
+                float: left;
+				font-family: Poppins;
+                
+                }
+				h3 ul button{
+             margin: 0px;
+             padding: 0px;
+             list-style: none;
+			 cursor: pointer;
+            }
+            
+              h3   ul button li a{
+             text-decoration: none;
+             color: black;
+             display: black;
+             background-color: #fff;
+			 cursor: pointer;
+			 
+               }
+         
+		h3{
+		     padding-left: 110px;
+		     border-radius: 10px;
+			 background-color: #11101d;
+			 border-bottom: 10px solid #11101D;
+			 width: 360px;
+      height: 45px;}
+		 h3 ul li a{
+             text-decoration: none;
+             color: black;
+             display: black;
+             background-color: #fff;
+			 cursor: pointer;
+			 font-size: 0.9rem;
+			 }
+		h3 ul button{
+            width: auto;
+       
+            border-radius: 13px;
+            background-color: white;
+            color: black;
+            padding: 3px 17px 3px 17px;
+			
+        }
+
+		 button:hover{
+		 color: white;
+		 background-color: #11101D;
+		 transition: all 0.4s ease; }
+		  button{
+             text-align: center;
+             font-size: 1.2rem; 
+             margin-right: 7px;
+             padding-bottom: 4px;	
+            } 
+.row{
+	 border: 3.5px solid #11101d;
+	 height: 183px;
+	 width: 1215px;
+	 border-radius: 20px;}
+
+   @media (max-width: 992px) {
+        .row{
+          border: none;
+	       height: 187px;
+	       width: 1215px;
+	       border-radius: none;
+         display: inline-block;
+         margin-left: 45px;
+        }
+        .card1{
+           display: flex;
+           width: 300px;
+margin-right: 10px;
+        }
+        .card2{
+           display: flex;
+           width: 300px;
+margin-right: 10px;
+        }
+        .card3{
+           display: flex;
+           width: 300px;
+margin-right: 10px;
+        }
+        .card4{
+           display: flex;
+           width: 300px;
+margin-right: 10px;
+        }
+        .card5{
+           display: flex;
+           width: 300px;
+margin-right: 10px;
+        }
+         
+        
+    }
+  .card1{
+            width: 206.5px;
+            height: 160px;
+            display: inline-block;
+            border-radius: 10px;
+            padding: 15px 25px;
+            box-sizing: border-box;
+            cursor: pointer;
+            margin: 10px 15px;
+            background-image: url('images/OIP.jpg');
+            background-position: center;
+            background-size: cover;
+            color: #FFF;
+        }
+        .card1:hover{
+            transform: scale(1.05);
+            box-shadow: 11px 11px 22px rgba(0, 0, 0, 0.6);
+        }.card2{
+            width: 206.5px;
+            height: 160px;
+            display: inline-block;
+            border-radius: 10px;
+            padding: 15px 25px;
+            box-sizing: border-box;
+            cursor: pointer;
+            margin: 10px 15px;
+            background-image: url('images/kemi.jpg');
+            background-position: center;
+            background-size: cover;
+            color: #FFF;
+        }
+        .card2:hover{
+            transform: scale(1.05);
+            box-shadow: 11px 11px 22px rgba(0, 0, 0, 0.6);
+        }.card3{
+            width: 206.5px;
+            height: 160px;
+            display: inline-block;
+            border-radius: 10px;
+            padding: 15px 25px;
+            box-sizing: border-box;
+            cursor: pointer;
+            margin: 10px 15px;
+            background-image: url('images/biology.jpg');
+            background-position: center;
+            background-size: cover;
+            color: #FFF;
+        }  
+        .card3:hover{
+            transform: scale(1.05);
+            box-shadow: 11px 11px 22px rgba(0, 0, 0, 0.6);
+        }.card4{
+            width: 206.5px;
+            height: 160px;
+            display: inline-block;
+            border-radius: 10px;
+            padding: 15px 25px;
+            box-sizing: border-box;
+            cursor: pointer;
+            margin: 10px 15px;
+            background-image: url('images/further.jpg');
+            background-position: center;
+            background-size: cover;
+            color: #FFF;
+        }  
+        .card4:hover{
+            transform: scale(1.04);
+            box-shadow: 11px 11px 22px rgba(0, 0, 0, 0.6);
+        }
+        .card5{
+            width: 206.5px;
+            height: 160px;
+            display: inline-block;
+            border-radius: 10px;
+            padding: 15px 25px;
+            box-sizing: border-box;
+            cursor: pointer;
+            margin: 10px 15px;
+            background-image: url('images/dats.jpg');
+            background-position: center;
+            background-size: cover;
+            color: #FFF;
+        }
+        .card5:hover{
+            transform: scale(1.03);
+            box-shadow: 11px 11px 22px rgba(0, 0, 0, 0.6);
+        }
+        #m4{
+    display: none;
+  }
+.card0{margin-left: 8%}	
+@media (max-width: 992px) {
+  .card0{
+    display: none;
+  }
+  
+  .card1{
+         display: flex;
+         width: 300px;
+margin-right: 10px;
+        }
+        .card2{
+           display: flex;
+           width: 300px;
+margin-right: 10px;
+        }
+        .card3{
+           display: flex;
+           width: 300px;
+margin-right: 10px;
+        }
+        .card4{
+           display: flex;
+           width: 300px;
+margin-right: 10px;
+        }
+        .card5{
+           display: flex;
+           width: 300px;
+          margin-right: 10px;
+           
+        }
+     
+
+    
+}
+
+@media (max-width: 576px) {
+  .card0{
+    display: block;
+  }	 
+  .sidebar{                                  font-family: sans-serif;
+    display: none;
+  }
+  .navbar{
+      height: 55px
+  }
+  #my{
+    margin-left: 0;
+    left: 0;
+  }
+  #my2{
+    margin-left: 0;
+    left: 0;
+  }
+  #my3{
+    margin-left: 0;
+    left: 0;
+    padding-left: 20px;
+  }
+  #m3{
+    z-index: 99;
+    width: 130px;
+            height: auto;
+            left: 5px;
+            top: 21px;
+  }
+  #m4{
+    margin-left: 0;
+    left: 0;
+    display: block;
+  }
+ 
+}
+
+.hello{
+            width: 200px;
+            height: auto;
+            left: 100px;
+            top: 21px;
+}
+.row .card1 p{
+  font-size: 12px;
+}
+.row .card2 p{
+  font-size: 12px;
+}
+.row .card3 p{
+  font-size: 12px;
+}
+.row .card4 p{
+  font-size: 12px;
+}
+.row .card5 p{
+  font-size: 12px;
+}
+h1{
+  
+  font-size: 2.8rem;
+  font-weight: 180;
+}
+.section{
+  padding-left: 100px;
+  padding-right: 40px;
+  color:#fff;
+}
+p7{
+  font-size: 1.8rem;
+}
+
+
+
+
+
+
+.slider{
+    width: 100%;
+    height: 310px;
+    background-position: center;
+    background-size: cover;
+   position: relative;
+    overflow: hidden;
+    z-index: -1;
+    border-bottom: 10px solid #11101d;
+}
+.slides{
+    width: 500%;
+    height: 310px;
+    display: flex;
+}
+.slides input{
+display: none;
+}
+.slide{
+    width: 20%;
+    transition: 3s;
+}
+.slide .pink{
+    width: 100%;
+   height: 440px;
+   background: url('images/reaction.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+.slide .pink p{
+  padding-right: 30px;   
+}
+.slide .yel{
+    width: 100%;
+   height: 440px;
+   background: url('images/H2O2.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+  
+}
+.slide .yel p{
+  padding-right: 30px;
+}
+.slide .blue{
+    width: 100%;
+   height: 440px;
+   background: url('images/methane.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+.slide .blue p{
+  padding-right: 30px;   
+}
+.slide .green{
+    width: 100%;
+   height: 440px;
+   background: url('images/matter.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+.slide .green p{
+  padding-right: 30px;   
+}
+.navigation-manual{
+    position: absolute;
+    width: 100%;
+    margin-top: -40px;
+    display: flex;
+    justify-content: center;
+}
+.mannual-btn{
+    border: 2px solid #ccc;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+.mannual-btn:not(:last-child){
+    margin-right: 40px;
+}
+.mannual-btn:hover{
+    background-color: #ccc;
+}
+#radio1:checked ~ .first{
+    margin-left: 0%;
+}
+#radio2:checked ~ .first{
+    margin-left: -20%;
+}
+#radio3:checked ~ .first{
+    margin-left: -40%;
+}
+#radio4:checked ~ .first{
+    margin-left: -60%;
+}
+#radio5:checked ~ .first{
+    margin-left: -80%;
+}
+#radio6:checked ~ .first{
+    margin-left: -500px;
+}
+.navigation-auto{
+    position:absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 460px;
+}
+.navigation-auto div{
+ 
+    padding: 5px;
+    border-radius:10px; 
+    transition:1s ;
+}
+.navigation-auto div:not(:last-child){
+ margin-right: 40px;
+}
+#radio1:checked~.navigation-auto .auto-btn-1{
+    background-color: #ccc;
+}
+#radio2:checked~.navigation-auto .auto-btn-2{
+    background-color: #ccc;
+}
+#radio3:checked~.navigation-auto .auto-btn-3{
+    background-color: #ccc;
+}
+#radio4:checked~.navigation-auto .auto-btn-4{
+    background-color: #ccc;
+}
+#radio5:checked~.navigation-auto .auto-btn-5{
+    background-color: #ccc;
+}
+#radio6:checked~.navigation-auto .auto-btn-6{
+    background-color: #ccc;
+}
+.homer{
+  margin-left: 70px;
+}
+
+.slides p{
+      font-size: 4em; 
+      color: white;
+      margin-left: 30px;
+      
+}
+h2{
+  display: none;
+}
+h4{
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .slides p{
+    display: none;
+  }
+  h2{
+    display: block;
+    color: white;
+    padding-left: 9px;
+    font-weight: 50;
+  }
+  h4{
+    display: block;
+    color: white;
+    padding-left: 9px;
+    font-weight: 50;
+  }
+  
+}
+
+
+
+</style>
+   </head>
+
+<body>
+
+
+  <header>
+    <div class="null">
+    <div class="navbar">
+        <div class="logo"><img src="images/new2.png"  id="m3" class="hello" style="position: absolute;
+            width: 200px;
+            height: auto;
+            left: 40px;
+            top: 21px;"></div>
+        <ul class="links">
+
+            <li  style="font-family: url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');"><a class="active" href="planC2.html">Home</a></li>
+      
+            <li><a href="#">Things to do</a>
+            <ul>
+              <li><a href="https://me.codejika.org/login" >Learn Coding</a></li>  
+               <li><a href="chatroom.html">Join Chat-room</a></li>
+                <li><a href="todo.html">To do list</a></li>
+           
+             
+             
+          </ul></li>
+          <li><a>Libary</a>
+            <ul>
+              <li><a href="PlanC3.1.html">SS1</a></li>
+              <li><a href="planC3.2.html">SS2</a></li>
+              <li><a href="PlanC3.3.html">SS3</a></li>
+          </ul></li>
+          <li><a href="#">Portfolio</a>
+        <ul>
+            <li><a href="about.html">About Us</a>
+           
+            </li>
+               <li><a href="feedback.html">Feedback</a></li>
+           
+        </ul></li>
+         
+        </ul>
+       <div class="search" id="m4" style="right: 0;">
+        <i><img src="images/search.png" style="height: 40px; width: auto;"/></i>
+       </div>
+        <div class="toggle_btn">
+           <i><img src="images/menu.png" style="height: 30px; width: 40px;"/></i> 
+        </div>
+    </div>
+  </div>
+  
+    <div class="dropdown_menu">
+      <li  style="font-family: url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');"><a class="active" href="planC2.html">Home</a></li>
+      <li><a href="#" style="color: #000000;">Things to do</a></li>
+      <li><a href="https://me.codejika.org/login" >Learn Coding</a></li>  
+      <li><a href="chatroom.html">Join Chat-room</a></li>
+      <li><a href="todo.html">To do list</a></li>
+      <li><a  style="color: #000000;">Libary</a></li>
+      <li><a href="PlanC3.1.html">SS1</a></li>
+      <li><a href="planC3.2.html">SS2</a></li>
+      <li><a href="PlanC3.3.html">SS3</a></li>
+      <li><a href="about.html" style="color: #000000;">About Us</a>  </li>
+      <li><a href="feedback.html" style="color: #000000;">Feedback</a></li>
+       <li href="planC9.html"><a class="active" href="#">User</a></li>
+        <li><a href="https://chat.openai.com/auth/login" style="color: #000000;">AI</a></li>
+        <li><a href="chatroom.html">Chat-room</a></li>  
+        <li><a href="summaries.html">Summaries</a></li>
+        <li><a href="https://www.exambly.com/">Exam test</a></li>
+        <li><a href="https://psychometrica.org/lp/test/iq-1-en-2/?version=android&loc_physical_ms=1010283&gclid=CjwKCAjwov6hBhBsEiwAvrvN6LAqhntadFFEatZq3bSyAcuqwdfesCROmLNershDDJD94NZHtiI3rRoCofIQAvD_BwE" style="color: #000000;">IQ test</a></li>
+        <li><a href="planC11.html">Settings</a></li>
+        
+    </div>
+    <div class="dropdown_menu two">
+      <li href="planC9.html"><a class="active" href="#">User</a></li>
+        <li><a href="https://chat.openai.com/auth/login" style="color: #000000;">AI</a></li>
+        <li><a href="chatroom.html">Chat-room</a></li>  
+        <li><a href="summaries.html">Summaries</a></li>
+        <li><a href="https://www.exambly.com/">Exam test</a></li>
+        <li><a href="https://psychometrica.org/lp/test/iq-1-en-2/?version=android&loc_physical_ms=1010283&gclid=CjwKCAjwov6hBhBsEiwAvrvN6LAqhntadFFEatZq3bSyAcuqwdfesCROmLNershDDJD94NZHtiI3rRoCofIQAvD_BwE" style="color: #000000;">IQ test</a></li>
+        <li><a href="planC11.html">Settings</a></li>
+     
+  </div>
+   </header>
+
+
+
+
+   
+  
+  <div class="homer" id="my">
+    <div class="slider">
+      <div class="slides">
+          <!-- radio button-->
+         <input type="radio" name="radio-btn" id="radio1" >
+         <input type="radio" name="radio-btn" id="radio2" >
+         <input type="radio" name="radio-btn" id="radio3" > 
+         <input type="radio" name="radio-btn" id="radio4" >
+         
+         <!-- radio button-->
+  
+          <!-- image start -->
+          
+                      <div class="slide first">
+                  <div class="yel"><p style="font-size: 2.5em; color: white">  Did you know that einstine died without a brain?</p>
+                    <h2>  Did you know that einstine died without a brain?</h2>
+                    <h4>When Nobel Prize-winning physicist Albert Einstein passed away on April 18, 1955, he left behind specific instructions. He didn’t want his body to be “worshipped” or his brain to be studied so he wished to be cremated. However, Thomas Harvey, the pathologist who was on call when Einstein died didn't quite respect Einstein’s wishes. Instead, he stole Einstein's brain. When Einstien’s family found out, they didn’t press charges or quite object to the theft and Harvey was able to keep the brain in two jars in his basement.</h4>
+                  <br>  <p  style="font-size: 1.3em; color: white">When Nobel Prize-winning physicist Albert Einstein passed away on April 18, 1955, he left behind specific instructions. He didn’t want his body to be “worshipped” or his brain to be studied so he wished to be cremated. However, Thomas Harvey, the pathologist who was on call when Einstein died didn't quite respect Einstein’s wishes. Instead, he stole Einstein's brain. When Einstien’s family found out, they didn’t press charges or quite object to the theft and Harvey was able to keep the brain in two jars in his basement.</p></div>
+              </div>
+  
+              <div class="slide">
+                  <div class="pink"><p style="font-size: 2.5em; color: white">  Did you know that 50% of the world’s oxygen is produced by the sea?</p>
+                    <h2>  Did you know that 50% of the world’s oxygen is produced by the sea?</h2>
+                    <h4>  Our first thought may be the rainforest. But did you know half of the world’s oxygen is actually produced by plankton, seaweed and other ocean-based photosynthesis. </h4>
+                    <br>  <p  style="font-size: 1.5em; color: white">   Our first thought may be the rainforest. But did you know half of the world’s oxygen is actually produced by plankton, seaweed and other ocean-based photosynthesis. </p></div>
+                 
+              </div>
+  
+              <div class="slide">
+                
+                  <div class="blue"><p style="font-size: 2.5em; color: white"> Did you know there are actually two Air Force Ones?</p>
+                    <h2> Did you know there are actually two Air Force Ones?</h2>
+                    <h4>When its only job is to transport one of the world’s most influential leaders all over the globe, it’s important that it is maintained in tip-top shape. So when Air Force One's SAM 28000 Boeing 747-200B plane is getting fixed, there's an identical plane standing by!</h4>
+                    <br>   <p  style="font-size: 1.5em; color: white">When its only job is to transport one of the world’s most influential leaders all over the globe, it’s important that it is maintained in tip-top shape. So when Air Force One's SAM 28000 Boeing 747-200B plane is getting fixed, there's an identical plane standing by!</p></div>
+                 
+              </div>
+  
+              <div class="slide">
+                 
+                  <div class="green"><p style="font-size: 2.5em; color: white"> Did you know a mail-man made a castle in France?</p>
+                    <h2>Did you know a mail-man made a castle in France?</h2>
+                    <h4>Le Palais Idéal is an 85-foot-long, 33-foot-high castle located south of Lyon made from rocks that a 19th-century French postman picked up during his mail route over the course of 34 years. Even though the mailman had no formal architecture training, he built the castle himself including the pillars, grottoes, and flying buttresses. Today, the massive structure still stands and visitors still go see it today.</h4>
+                    <br>   <p style="font-size: 1.5em; color: white">Le Palais Idéal is an 85-foot-long, 33-foot-high castle located south of Lyon made from rocks that a 19th-century French postman picked up during his mail route over the course of 34 years. Even though the mailman had no formal architecture training, he built the castle himself including the pillars, grottoes, and flying buttresses. Today, the massive structure still stands and visitors still go see it today.</p></div>
+              </div>
+  
+          
+         
+          <!-- image close-->
+  
+           <!--Auto nav start1-->
+  
+           <div class="navigation-auto">
+              <div class="auto-btn-1"></div>
+              <div class="auto-btn-2"></div>
+              <div class="auto-btn-3"></div>
+              <div class="auto-btn-4"></div>
+            
+           </div>
+           <!--Auto nav close1-->
+      </div>
+  <!-- manual -->
+               <div class="navigation-manual">
+                  <label for=" radio1" class="mannual-btn"></label>
+                  <label for=" radio2" class="mannual-btn"></label>
+                  <label for=" radio3" class="mannual-btn"></label>
+                  <label for=" radio4" class="mannual-btn"></label>
+                  
+               </div> 
+  
+  <!-- manual -->
+  
+  </div>
+  <!-- image slider -->
+  <script src="planc6.2.js"></script>
+  
+  </div>
+  
+  
+  
+   <h3 id="my3"> 
+   <ul id="my3">
+    <a href="planC3.1.html">    <button>SS1</button></a>
+    <a href="planC3.2.html">    <button>SS2</button></a>
+    <a href="planC3.3.html">    <button>SS3</button></a>
+     </ul>
+  </h3>
+  <br>
+        <div class="card0" id="my2">
+      <div class="row" id="my2">
+    <a href="PlanC3.1.html"><div class="card1">
+      PHYSICS
+      <p>check out the study of matter and the interactions between the fundamental constituents of the observeable universe</p>
+    </div></a>
+    <a href="PlanC3.1.html"><div class="card2">
+      CHEMISTRY
+      <p>check out the study of matter and the interactions between the fundamental constituents of the observeable universe</p>
+    </div></a>
+    <a href="PlanC3.1.html"><div class="card3">
+      BIOLOGY
+      <p>check out the study of matter and the interactions between the fundamental constituents of the observeable universe</p>
+    </div></a>
+    <div class="card4">
+      FURTHER-MATHS
+      <p>check out the study of matter and the interactions between the fundamental constituents of the observeable universe</p>
+    </div>
+    <div class="card5">
+      DATA-PRO.
+      <p>check out the study of matter and the interactions between the fundamental constituents of the observeable universe</p>
+    </div>
+  
+    </div>
+    </div></br>
+
+
+
+
+
+  <div class="sidebar">
+    <div class="logo-details">
+     <div class="logo_name"><div class="logo"><img src="images/new1.png" class="hello" style=" position: fixed;
+        width: 200px;
+        height: auto;
+        left: 20px;
+        top: 28px"></div></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Search</span>
+      </li>
+
+      <li>
+      <p><a href="planC9.html">
+         <i class='bx bx-user' ></i>
+         <span class="links_name" style="margin-top: 15px; margin-right: 130px;">User</span>
+       </a>
+       <span class="tooltip">User</span>
+      </p>  </li>
+
+      <li>
+        <a href="https://chat.openai.com/auth/login">
+          <p><a href="https://chat.openai.com/auth/login"">
+               <i class='bx bx-grid-alt'></i>
+               <span class="links_name" style="margin-top: 15px; margin-right: 90px;" href="https://chat.openai.com/auth/login">Try out A.I.</span>
+             </a>
+              <span class="tooltip" href="https://chat.openai.com/auth/login">Try out A.I.</span>
+             </p>   </li></a>
+
+     <li>
+    <p>   <a href="chatroom.html">
+         <i class='bx bx-chat' ></i>
+         <span class="links_name" style="margin-top: 15px; margin-right: 93px">Chat-room</span>
+       </a>
+       <span class="tooltip">Chat-room</span>
+      </p>   </li>
+     <li>
+
+      <li>
+        <p>  <a href="summaries.html">
+             <i class='bx bx-cart-alt' ></i>
+             <span class="links_name" style="margin-top: 15px; margin-right: 97px;">Sumarries</span>
+           </a>
+           <span class="tooltip">Sumarries</span>
+          </p>  </li>
+     <li>
+   
+    <p>   <a href="https://www.exambly.com/">
+         <i class='bx bx-heart' ></i>
+         <span class="links_name"style="margin-top: 15px;  margin-right: 97px; " >Quick test</span>
+       </a>
+       <span class="tooltip"> Qick Test</span>
+      </p>  </li>
+	    <li>
+    <p>   <a href="https://psychometrica.org/lp/test/iq-1-en-2/?version=android&loc_physical_ms=1010283&gclid=CjwKCAjwov6hBhBsEiwAvrvN6LAqhntadFFEatZq3bSyAcuqwdfesCROmLNershDDJD94NZHtiI3rRoCofIQAvD_BwE">
+         <i class='bx bx-pie-chart-alt-2' ></i>
+         <span class="links_name" style="margin-top: 15px;  margin-right: 117px;">IQ Test</span>
+       </a>
+       <span class="tooltip">IQ Test</span>
+      </p>  </li>
+
+      <li>
+        <p>   <a href="time.html">
+             <i class='bx bx-folder' ></i>
+             <span class="links_name" style="margin-top: 15px; margin-right: 97px;" >Time table</span>
+           </a>
+           <span class="tooltip">Time-table</span>
+          </p>  </li>
+
+     <li>
+    <p>  <a href="planC11.html">
+         <i class='bx bx-cog' ></i>
+         <span class="links_name" style="margin-top: 15px;  margin-right: 117px;">Setting</span>
+       </a>
+       <span class="tooltip">Setting</span>
+      </p>   </li>
+     <li class="profile">
+         <div class="profile-details">
+           <img src="images/man.jpg" alt="profileImg">
+           <div class="name_job">
+             <div class="name">Adriel</div>
+             <div class="job">Web master in training</div>
+           </div>
+         </div>
+         <i class='bx bx-log-out' id="log_out" ></i>
+     </li>
+    </ul>
+  </div>
+  
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+</body>
+<script>
+  const toggleBtn = document.querySelector('.toggle_btn')
+  const search = document.querySelector('.search')
+    const toggleBtnIcon = document.querySelector('.toggle_btn i')
+    const searchIcon = document.querySelector('.search i')
+    const dropDownMenu = document.querySelector('.dropdown_menu')
+    const dropDownMenu2 = document.querySelector('.dropdown_menu.two')
+
+    toggleBtn.onclick = function() {
+        dropDownMenu.classList.toggle('open')
+        const IsOpen = dropDownMenu.classList.contains('open')
+
+        toggleBtnIcon.classList = IsOpen
+    }
+    search.onclick = function() {
+        dropDownMenu2.classList.toggle('open')
+        const IsOpen2 = dropDownMenu2.classList.contains('open')
+
+        searchIcon.classList = IsOpen2
+    }
+</script>
+</html>
+
+ 
